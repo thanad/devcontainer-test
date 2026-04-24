@@ -17,9 +17,6 @@
     {
       "port": 3000,
       "onAutoForward": "notify"
-    },
-    {
-      "port": 5432
     }
   ],
   "postCreateCommand": "npm install"
