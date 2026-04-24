@@ -1,25 +1,18 @@
-## Run Docker Compose in Coder
+## Run In Coder Without Docker Compose
 
-This repository is configured so the Coder workspace builds from `.devcontainer/devcontainer.json`, then you can run Docker Compose manually inside the workspace.
-
-Requirements in Coder:
-
-- The workspace must have access to a Docker daemon.
-- Usually that means mounting `/var/run/docker.sock` into the workspace or enabling Docker-in-Docker in the Coder template.
+This branch is configured for Coder as a single-container devcontainer. It does not require Docker Compose or access to `/var/run/docker.sock`.
 
 After the workspace opens:
 
 ```sh
-./start-dev.sh
+npm install
+npm run dev
 ```
 
-The script will verify that Docker and Docker Compose are available before starting:
+The app will be available on port `3000`.
 
-- `node-app` on port `3000`
-- `postgres` on port `5432`
+Database notes:
 
-Stop services with:
-
-```sh
-./start-dev.sh --stop
-```
+- If `DATABASE_URL` is not set, the app defaults to `postgres://postgres:postgres@localhost:5432/postgres`.
+- The server still starts even if PostgreSQL is unavailable.
+- Check `GET /health` to confirm database connectivity.
