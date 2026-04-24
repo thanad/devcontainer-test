@@ -1,10 +1,13 @@
 FROM node:20-bookworm
 
-WORKDIR /workspace
+WORKDIR /workspaces
 
-RUN apt-get update && apt-get install -y docker.io vim git postgresql-client && rm -rf /var/lib/apt/lists/*
-
-COPY .devcontainer/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    curl \
+    docker.io \
+    docker-compose-v2 \
+    git \
+    postgresql-client \
+    vim \
+    && rm -rf /var/lib/apt/lists/*

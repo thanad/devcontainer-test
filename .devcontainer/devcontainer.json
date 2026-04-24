@@ -1,8 +1,10 @@
 {
-  "name": "Node.js + Docker-in-Docker + PostgreSQL",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "node-app",
-  "workspaceFolder": "/workspace",
+  "name": "Node.js Devcontainer",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -14,11 +16,11 @@
   "ports": [
     {
       "port": 3000,
-      "onAutoForward": "openBrowser"
+      "onAutoForward": "notify"
     },
     {
       "port": 5432
     }
   ],
-  "postCreateCommand": "apk add docker-cli && npm install"
+  "postCreateCommand": "npm install"
 }

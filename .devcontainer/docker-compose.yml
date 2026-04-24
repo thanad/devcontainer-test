@@ -2,21 +2,20 @@ version: '3.8'
 
 services:
   node-app:
-    image: node:20-alpine
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /Users/doengnce7/Documents/devcontainrs-test:/workspace
+      - ..:/workspace
     environment:
       - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres
       - NODE_ENV=development
-    extra_hosts:
-      - "postgres:host-gateway"
     ports:
       - "3000:3000"
     depends_on:
       postgres:
-        condition: service_started
-    command: sh -c "apk add docker-cli && rm -rf /root/.npm /workspace/node_modules /workspace/package-lock.json && cd /workspace && npm install && npm run dev"
+        condition: service_healthy
+    command: sh -lc "npm install && npm run dev"
     user: root
     working_dir: /workspace
 
