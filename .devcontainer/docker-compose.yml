@@ -1,12 +1,10 @@
-version: '3.8'
-
 services:
   node-app:
     build:
-      context: ..
-      dockerfile: .devcontainer/Dockerfile
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - ..:/workspace
+      - .:/workspace
     environment:
       - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres
       - NODE_ENV=development
@@ -15,9 +13,9 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    command: sh -lc "npm install && npm run dev"
+    command: sleep infinity
     user: root
-    working_dir: /workspace
+    working_dir: /workspace/
 
   postgres:
     image: postgres:15-alpine

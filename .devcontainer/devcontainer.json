@@ -1,9 +1,7 @@
 {
   "name": "Node.js Devcontainer",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": ".."
-  },
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "node-app",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "customizations": {
     "vscode": {
@@ -12,12 +10,5 @@
         "esbenp.prettier-vscode"
       ]
     }
-  },
-  "ports": [
-    {
-      "port": 3000,
-      "onAutoForward": "notify"
-    }
-  ],
-  "postCreateCommand": "npm install"
+  }
 }
