@@ -1,5 +1,5 @@
 services:
-  node-app:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
@@ -13,9 +13,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    command: sleep infinity
-    user: root
-    working_dir: /workspace/
+    command: /bin/sh -c "while sleep 30; do :; done"
 
   postgres:
     image: postgres:15-alpine
